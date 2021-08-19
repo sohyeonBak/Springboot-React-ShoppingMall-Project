@@ -74,10 +74,8 @@
   display: flex;
   justify-content: center;
   background-color: $default;
-
   .category-zone {
     width: 1280px;
-    border-bottom: 1px solid $element1;
     display: flex;
     justify-content: flex-start;
     padding-left: 6rem;
@@ -115,6 +113,35 @@
           color: $element2;
           cursor: pointer;
         }
+      }
+    }
+  }
+  .search-zone {
+    width: 1280px;
+    height: 50px;
+    border-left: 1px solid $element1;
+    border-right: 1px solid $element1;
+    border-bottom: 1px solid $element1;
+    svg {
+      vertical-align: middle;
+      display: inline-block;
+      padding-top: 0.1rem;
+      padding-left: 1rem;
+    }
+    form {
+      display: inline-block;
+      line-height: 50px;
+      input {
+        width: 250px;
+        height: 30px;
+        border: 1px solid #fff;
+        background-color: #fff;
+      }
+      input::placeholder {
+        font-family: $defaultTxtFont;
+        font-size: 16px;
+        font-weight: 400;
+        color: $element3;
       }
     }
   }

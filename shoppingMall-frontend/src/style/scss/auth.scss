@@ -1,0 +1,127 @@
+@import "./reset.scss";
+@import "./layout";
+
+.auth {
+  display: flex;
+  justify-content: center;
+  .auth-section {
+    width: 540px;
+    height: 560px;
+    border: 1px solid $element1;
+    margin-top: 4rem;
+    .auth-list {
+      display: flex;
+      justify-content: center;
+      height: 50px;
+      width: 100%;
+      border-bottom: 1px solid $element1;
+      .auth-list-contents {
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        padding-top: 1.5rem;
+        li {
+          width: 60px;
+          font-family: $defaultTxtFont;
+          font-size: 14px;
+          font-weight: 600;
+          color: $element2;
+        }
+        li:hover {
+          color: $element3;
+          border-bottom: 1px solid $element3;
+          padding-bottom: 0.7rem;
+          cursor: pointer;
+        }
+      }
+    }
+    .auth-contents {
+      display: flex;
+      justify-content: center;
+      .auth-feilds {
+        width: 300px;
+        margin-top: 3rem;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        input {
+          border: 1px solid $element2;
+          width: 250px;
+          height: 40px;
+          margin-bottom: 0.8rem;
+          padding-left: 0.5rem;
+          box-sizing: border-box;
+        }
+        button {
+          display: inline-block;
+          width: 250px;
+          height: 40px;
+          margin-top: 0.5rem;
+          background-color: $element2;
+          color: #fff;
+        }
+        a {
+          display: inline-block;
+          margin-top: 1rem;
+          font-family: $defaultTxtFont;
+          font-size: 12px;
+          font-weight: 400;
+          color: $element2;
+          border-bottom: 1px solid $element2;
+        }
+      }
+    }
+    .auth-api {
+      width: 100%;
+      margin-top: 5rem;
+      border-top: 1px solid $element1;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      .api-list {
+        width: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        li {
+          width: 140px;
+          height: 40px;
+          border: 1px solid $element1;
+          font-family: $defaultTxtFont;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 40px;
+          padding-left: 1rem;
+          box-sizing: border-box;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+    .sign-contents {
+      display: flex;
+      justify-content: center;
+      .sign-feilds {
+        width: 300px;
+        margin-top: 3rem;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        input {
+          border: 1px solid $element2;
+          width: 250px;
+          height: 40px;
+          margin-bottom: 0.8rem;
+          padding-left: 0.5rem;
+          box-sizing: border-box;
+        }
+        button {
+          display: inline-block;
+          width: 250px;
+          height: 40px;
+          margin-top: 0.5rem;
+          background-color: $element2;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
