@@ -1,5 +1,5 @@
-import React from 'react';
 import { useState } from 'react';
+
 
 const CategoryList = () => {
   const [list, setList]=useState(
@@ -17,6 +17,8 @@ const CategoryList = () => {
       kind:"outer"
     }]
 )
+
+
   return (
     <div className="hide-section">
       <div className="category-zone">
