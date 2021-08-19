@@ -1,0 +1,130 @@
+@import "./reset.scss";
+@import "./layout";
+
+.header {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid $element1;
+  .site-header {
+    display: flex;
+    width: 1280px;
+    .header-sec-left {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      li {
+        line-height: 40px;
+      }
+      h1 {
+        font-family: $defaultNumFont;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      li:last-child {
+        font-family: $defaultTxtFont;
+        font-size: 14px;
+        font-weight: 400;
+        margin-left: 0.5rem;
+        margin-top: 0.2rem;
+        cursor: pointer;
+      }
+    }
+    .header-sec-right {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      li {
+        line-height: 40px;
+        padding-left: 0.8rem;
+        font-family: $defaultTxtFont;
+        font-size: 14px;
+        font-weight: 400;
+        a {
+          font-family: $defaultTxtFont;
+          font-size: 14px;
+          font-weight: 400;
+          svg {
+            padding-top: 0.4rem;
+          }
+        }
+      }
+      li:first-child {
+        a {
+          display: inline-block;
+          height: 100%;
+          line-height: 40px;
+          svg {
+            vertical-align: middle;
+            padding-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+.hide-section {
+  width: 100%;
+  height: 270px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  background-color: $default;
+
+  .category-zone {
+    width: 1280px;
+    border-bottom: 1px solid $element1;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 6rem;
+    padding-top: 2rem;
+    box-sizing: border-box;
+    position: relative;
+    &::before {
+      width: 100%;
+      height: 1px;
+      content: "";
+      position: absolute;
+      top: 100px;
+      left: 0;
+    }
+    div {
+      padding-right: 3rem;
+      h3 {
+        font-family: $defaultTxtFont;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      ul {
+        padding-top: 1rem;
+        li {
+          font-family: $defaultTxtFont;
+          font-size: 12px;
+          font-weight: 400;
+          padding-top: 0.5rem;
+          color: $element3;
+        }
+        li:first-child {
+          font-weight: 600;
+        }
+        li:hover {
+          color: $element2;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@include desktop {
+  .site-header {
+    width: 100%;
+  }
+  .category-zone {
+    width: 100%;
+  }
+}
