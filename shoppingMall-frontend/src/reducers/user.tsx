@@ -1,4 +1,5 @@
 import produce from "immer"
+import { createAsyncAction } from "typesafe-actions";
 
 type MyInfo = {
   id: number,
@@ -7,14 +8,14 @@ type MyInfo = {
   password: string
 }
 
-interface User {
+interface SignUpResponse {
   signUpLoading: boolean,
   signUpDone?: boolean,
   signUpError?: null,
   me?: MyInfo | null
 }
 
-export const initialState:User = {
+export const initialState:SignUpResponse = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
@@ -22,12 +23,17 @@ export const initialState:User = {
 }
 
 
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST' as const;
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' as const;
-export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' as const;
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' ;
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' ;
 
+export const signUpAsync = createAsyncAction(
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE
+)<string, SignUpResponse, Error>()
 
-const reducer = (state:User = initialState, action:any) => produce(state, (draft) => {
+const reducer = (state:SignUpResponse = initialState, action:any) => produce(state, (draft) => {
   switch(action.type) {
     case SIGN_UP_REQUEST:
       draft.signUpLoading = true;
