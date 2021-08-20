@@ -25,10 +25,5 @@ public class UserApiController {
 		return new ResponseEntity<>(userService.회원가입(user), HttpStatus.CREATED);
 	}
 	
-	@GetMapping("login")
-	public ResponseEntity<?> login(@RequestBody User user) {
-		return new ResponseEntity<>(userService.회원가입(user), HttpStatus.CREATED);
-	}
-	
 	
 }

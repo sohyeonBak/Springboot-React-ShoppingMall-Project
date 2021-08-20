@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.filter.CorsFilter;
 
 import com.yh.shopping.config.oauth.PrincipalOauth2UserService;
 
@@ -16,18 +17,25 @@ import com.yh.shopping.config.oauth.PrincipalOauth2UserService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
+
 	@Autowired
 	private PrincipalOauth2UserService principalOauth2UserService;
+	
+	@Autowired
+	private CorsFilter corsFilter;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests()
+		http
+			.addFilter(corsFilter)
+		 	.authorizeRequests()
 			.antMatchers("/user/**").authenticated() // 인증만 되면 들어갈 수 있는 주소!!
 			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
@@ -43,4 +51,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.userInfoEndpoint()
 			.userService(principalOauth2UserService);
 	}
+	
 }
