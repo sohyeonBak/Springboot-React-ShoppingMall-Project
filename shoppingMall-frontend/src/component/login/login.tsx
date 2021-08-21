@@ -2,35 +2,31 @@ import React from 'react';
 import { useState } from 'react';
 
 const Login = () => {
-  const [login, setLogin]= useState({
-    username:'',
-    password:''
+  const [login, setLogin] = useState({
+    username: '',
+    password: ''
   })
 
-  const onFindLogin = (e:any) => {
+  const onFindLogin = (e: any) => {
     setLogin({
       ...login,
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
-  const onAddLog = (e:any) => {
+  const onAddLog = (e: any) => {
     e.preventDefault();
     console.log(login)
-    fetch("http://localhost:8000/login",{
+    fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
-        "Content-Type" : "application/json; charset=utf-8",
+        "Content-Type": "application/json; charset=utf-8",
       },
       body: JSON.stringify(login)
     })
-    .then((res)=>{
-      console.log(res)
-      return res.json()
-    })
-    .then((res)=>{
-      console.log(res)
-    })
+      .then((res) => {
+        console.log(res)
+      })
   }
 
   return (
