@@ -1,51 +1,53 @@
 import React from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpAsync, SignUpProfile } from '../../reducers/user';
+
+type userInfo ={
+  email: string,
+  username: string,
+  password: string,
+}
 
 const Signup = () => {
-  const [ user, setUser ] = useState({
-    email:'',
-    username:'',
-    password:''
-  })
+  const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
-  const addUserInfo = (e:any) => {
-    setUser({
-      ...user,
-      [e.target.name] : e.target.value
-    })
-  }
+  const onEmail = useCallback((e:any) => {
+    setEmail(e.target.value)
+  },[])
 
-  const onSignup = (e:any) => {
+  const onUserName = useCallback((e:any) => {
+    setUserName(e.target.value)
+  },[])
+
+  const onPassword = useCallback((e:any) => {
+    setPassword(e.target.value)
+  },[])
+
+  const dispatch = useDispatch();
+  const onSignUp = useCallback((e:any) => {
     e.preventDefault();
-    console.log(user)
-    fetch("http://localhost:8000/join",{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(user)
-    })
-    .then((res)=>{
-      console.log(res)
-      return res.json()
-    })
-    .then((res)=>{
-      console.log(res)
-    })
-  }
+    const userInfo: userInfo = {email, username, password}
+    dispatch(signUpAsync.request(userInfo))
+    console.log({email, username, password})
+  },[email, username, password])
+
 
   return(
     <div className="sign-contents">
-      <form className="sign-feilds" onSubmit={onSignup}>
-        <input type="text" placeholder="이메일" name="email" onChange={addUserInfo}></input>
+      <form className="sign-feilds" >
+        <input type="text" placeholder="이메일" value={email} onChange={onEmail}></input>
         <br />
-        <input type="text" placeholder="아이디" name='username' onChange={addUserInfo}></input>
+        <input type="text" placeholder="아이디" value={username} onChange={onUserName}></input>
         <br />
-        <input type="text" placeholder="비밀번호" name='password' onChange={addUserInfo}></input>
+        <input type="text" placeholder="비밀번호" value={password} onChange={onPassword}></input>
         <br />
         {/* <input type="text" placeholder="비밀번호 확인"></input>
         <br /> */}
-        <button>확인</button>
+        <button onClick={onSignUp}>확인</button>
         <br />
       </form>
     </div>
@@ -53,3 +55,4 @@ const Signup = () => {
 }
 
 export default Signup;
+

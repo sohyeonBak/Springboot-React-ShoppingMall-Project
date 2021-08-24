@@ -1,56 +1,57 @@
+import { AxiosError } from "axios";
 import produce from "immer"
-import { createAsyncAction } from "typesafe-actions";
+import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
+import { asyncActionCreator } from "../sagas/util";
+import { asyncState, AsyncState } from "./util";
 
-type MyInfo = {
-  id: number,
-  email:string,
+
+//type
+export interface SignUpProfile {
+  email: string,
   username: string,
-  password: string
-}
-
-interface SignUpResponse {
-  signUpLoading: boolean,
-  signUpDone?: boolean,
-  signUpError?: null,
-  me?: MyInfo | null
-}
-
-export const initialState:SignUpResponse = {
-  signUpLoading: false,
-  signUpDone: false,
-  signUpError: null,
-  me:null
+  password: string,
 }
 
 
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' ;
-export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' ;
+//state
+export type SignUpState = {
+  me: AsyncState<SignUpProfile, Error>;
+}
+
+const initialState: SignUpState = {
+  me: asyncState.initial()
+}
+
+
+//action type
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
+
 
 export const signUpAsync = createAsyncAction(
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE
-)<string, SignUpResponse, Error>()
+)<SignUpProfile, SignUpProfile, AxiosError>()
 
-const reducer = (state:SignUpResponse = initialState, action:any) => produce(state, (draft) => {
-  switch(action.type) {
-    case SIGN_UP_REQUEST:
-      draft.signUpLoading = true;
-      draft.signUpDone = false;
-      draft.signUpError=null;
-    break;
-    case SIGN_UP_SUCCESS:
-      draft.signUpLoading = false;
-      draft.signUpDone = true;
-    break;
-    case SIGN_UP_FAILURE:
-      draft.signUpLoading = true;
-      draft.signUpError=action.error;
-    break;
-      default:
-            break;
-  }
+export type SignUpAction = ActionType<typeof signUpAsync>
+
+
+//reducer
+const signup = createReducer<SignUpState, SignUpAction>(initialState, {
+  [SIGN_UP_REQUEST]: state => ({
+    ...state,
+    me: asyncState.load()
+  }),
+  [SIGN_UP_SUCCESS]: (state, action) => ({
+    ...state,
+    me: asyncState.success(action.payload)
+  }),
+  [SIGN_UP_FAILURE]: (state, action) => ({
+    ...state,
+    me: asyncState.error(action.payload)
+  })
 })
 
-export default reducer;
+export default signup;
