@@ -6,19 +6,24 @@ import { createAsyncSaga } from "./util";
 
 async function signUpAPI(payload:any) {
   const response = await axios.post<SignUpProfile>('/join', payload)
-  console.log(response)
   return response.data
 }
 
 async function logInAPI(payload:any) {
-  const response = await axios.post<LogInResProfile>('/login', payload)
-  console.log(payload)
-  return response.data
+  const response = await axios
+    .post<LogInResProfile>('/login', payload)
+    .then((res)=>{
+      if(res.data.accessToken) {
+        localStorage.setItem("user", JSON.stringify(res.data))
+      }
+      return res.data
+    })
+  return response
 }
 
 
 const getSignUpSaga = createAsyncSaga(signUpAsync, signUpAPI)
-const getLogINSaga = createAsyncSaga(logInAsync, logInAPI)
+const getLogInSaga = createAsyncSaga(logInAsync, logInAPI)
 
 
 function* watchSignUp(){
@@ -26,7 +31,7 @@ function* watchSignUp(){
 }
 
 function* watchLogIn(){
-  yield takeLatest(LOG_IN_REQUEST, getLogINSaga)
+  yield takeLatest(LOG_IN_REQUEST, getLogInSaga)
 }
 
 export default function* userSaga() {

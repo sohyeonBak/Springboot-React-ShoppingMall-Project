@@ -16,8 +16,11 @@ export interface LogInReqProfile {
 }
 
 export interface LogInResProfile {
-  jwtToken: string,
-  
+  user:{
+    username: string,
+    email: string
+  }
+  accessToken: string,
 }
 
 //state
@@ -86,7 +89,7 @@ const user = createReducer<UserState>(initialState, {
     ...state,
     login: asyncState.load()
   }),
-  [LOG_IN_SUCCESS]: (state, action) => (console.log(action),
+  [LOG_IN_SUCCESS]: (state, action) => (console.log(action.payload),
     {
     ...state,
     login: asyncState.success(action.payload)
