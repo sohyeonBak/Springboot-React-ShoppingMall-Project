@@ -1,43 +1,42 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState,useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { logInRequestAction } from '../../reducers/user';
+
+type LogInState = {
+  username: string,
+  password: string
+}
 
 const Login = () => {
-  const [login, setLogin] = useState({
-    username: '',
-    password: ''
-  })
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const onFindLogin = (e: any) => {
-    setLogin({
-      ...login,
-      [e.target.name]: e.target.value
-    })
+  const onUsername = (e: any) => {
+    setUsername(e.target.value)
   }
 
-  const onAddLog = (e: any) => {
+  const onPassword = (e: any) => {
+    setPassword(e.target.value)
+  }
+
+
+  const dispatch = useDispatch()
+  const onAddLogIN = useCallback((e: any) => {
     e.preventDefault();
-    console.log(login)
-    fetch("http://localhost:8000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(login)
-    })
-      .then((res) => {
-        console.log(res)
-      })
-  }
+    const login: LogInState={username,password}
+    dispatch(logInRequestAction(login))
+    console.log(username,password)
+  },[username,password])
 
   return (
     <>
       <div className="auth-contents">
-        <form className="auth-feilds" onSubmit={onAddLog}>
-          <input type="text" placeholder="아이디" onChange={onFindLogin} name='username' ></input>
+        <form className="auth-feilds" >
+          <input type="text" placeholder="아이디" value={username} onChange={onUsername} name='username' ></input>
           <br />
-          <input type="text" placeholder="비밀번호" onChange={onFindLogin} name='password' ></input>
+          <input type="text" placeholder="비밀번호" value={password} onChange={onPassword} name='password' ></input>
           <br />
-          <button>확인</button>
+          <button onClick={onAddLogIN}>확인</button>
           <br />
           <a>아이디/비밀번호 찾기</a>
         </form>
