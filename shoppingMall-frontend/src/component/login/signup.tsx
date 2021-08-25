@@ -2,7 +2,7 @@ import React from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUpAsync, SignUpProfile } from '../../reducers/user';
+import { signUpAsync } from '../../reducers/user';
 
 type userInfo ={
   email: string,
@@ -32,7 +32,7 @@ const Signup = () => {
     e.preventDefault();
     const userInfo: userInfo = {email, username, password}
     dispatch(signUpAsync.request(userInfo))
-    console.log({email, username, password})
+
   },[email, username, password])
 
 

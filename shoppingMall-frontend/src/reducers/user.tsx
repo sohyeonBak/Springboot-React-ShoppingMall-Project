@@ -1,8 +1,6 @@
 import { AxiosError } from "axios";
-import produce from "immer"
 import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
-import { asyncActionCreator } from "../sagas/util";
-import { asyncState, AsyncState } from "./util";
+import { asyncState, AsyncState, createAsyncReducer } from "./util";
 
 
 //type
@@ -12,14 +10,26 @@ export interface SignUpProfile {
   password: string,
 }
 
-
-//state
-export type SignUpState = {
-  me: AsyncState<SignUpProfile, Error>;
+export interface LogInReqProfile {
+  username: string,
+  password: string,
 }
 
-const initialState: SignUpState = {
-  me: asyncState.initial()
+export interface LogInResProfile {
+  jwtToken: string,
+  
+}
+
+//state
+export type UserState = {
+  login: AsyncState<LogInResProfile,Error>
+}
+
+
+
+//initialStat
+const initialState: UserState = {
+  login: asyncState.initial()
 }
 
 
@@ -28,7 +38,12 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
 
+export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
 
+
+//action
 export const signUpAsync = createAsyncAction(
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
@@ -38,20 +53,49 @@ export const signUpAsync = createAsyncAction(
 export type SignUpAction = ActionType<typeof signUpAsync>
 
 
+export const logInAsync = createAsyncAction(
+  LOG_IN_REQUEST,
+  LOG_IN_SUCCESS,
+  LOG_IN_FAILURE
+)<LogInReqProfile, LogInResProfile, AxiosError>()
+
+export const logInRequestAction =(payload: any)=>({
+  type: LOG_IN_REQUEST,
+  payload
+})
+
+export type LogInAction = ActionType<typeof logInAsync>
+
+
 //reducer
-const signup = createReducer<SignUpState, SignUpAction>(initialState, {
+
+const user = createReducer<UserState>(initialState, {
   [SIGN_UP_REQUEST]: state => ({
     ...state,
-    me: asyncState.load()
+    signup: asyncState.load()
   }),
-  [SIGN_UP_SUCCESS]: (state, action) => ({
+  [SIGN_UP_SUCCESS]: (state) => ({
     ...state,
-    me: asyncState.success(action.payload)
+    signup: asyncState.done()
   }),
   [SIGN_UP_FAILURE]: (state, action) => ({
     ...state,
-    me: asyncState.error(action.payload)
-  })
+    signup: asyncState.error(action.payload)
+  }),
+  [LOG_IN_REQUEST]: state => ({
+    ...state,
+    login: asyncState.load()
+  }),
+  [LOG_IN_SUCCESS]: (state, action) => (console.log(action),
+    {
+    ...state,
+    login: asyncState.success(action.payload)
+    
+  }),
+  [LOG_IN_FAILURE]: (state, action) => ({
+    ...state,
+    login: asyncState.error(action.payload)
+  }),
 })
 
-export default signup;
+export default user;
