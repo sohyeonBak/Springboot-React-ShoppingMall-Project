@@ -12,7 +12,7 @@ async function signUpAPI(payload:any) {
 async function logInAPI(payload:any) {
   const response = await axios
     .post<LogInResProfile>('/login', payload)
-    .then((res)=>{
+    .then((res)=>{  
       if(res.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(res.data))
       }

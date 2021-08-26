@@ -16,10 +16,6 @@ export interface LogInReqProfile {
 }
 
 export interface LogInResProfile {
-  user:{
-    username: string,
-    email: string
-  }
   accessToken: string,
 }
 
