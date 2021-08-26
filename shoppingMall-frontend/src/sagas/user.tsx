@@ -12,6 +12,7 @@ async function signUpAPI(payload:any) {
 async function logInAPI(payload:any) {
   const response = await axios.post<LogInResProfile>('/login', payload).then((res)=>{  
       console.log(res.headers)
+      console.log(res.headers.get('Authorization'))
       // if(res.data.accessToken) {
       //   localStorage.setItem("token", JSON.stringify(res.data.accessToken))
       // }
