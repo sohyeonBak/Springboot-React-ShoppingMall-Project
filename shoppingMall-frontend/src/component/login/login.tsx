@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     const login: LogInState={username,password}
     dispatch(logInRequestAction(login))
-    console.log(username,password)
+    console.log(login)
   },[username,password])
 
   return (
