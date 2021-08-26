@@ -55,11 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll() // 위 주소를 제외한 나머지는 로그인 없이 접근 가능
 			.and()
-			.formLogin()
-			.loginPage("/loginForm") // 시큐리티 로그인 폼을 사용하지 않고 내가 만든 로그인 폼 사용
-			.loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해 줍니다.
-			.defaultSuccessUrl("/")
-			.and()
 			.oauth2Login()
 			.loginPage("/loginForm") // 구글 로그인이 완료된 뒤의 후처리가 필요. Tip. 코드x, (엑세스토큰+사용자프로필정보o)
 			.userInfoEndpoint()

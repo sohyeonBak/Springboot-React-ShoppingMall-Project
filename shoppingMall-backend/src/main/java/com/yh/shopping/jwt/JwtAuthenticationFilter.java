@@ -102,7 +102,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         
         System.out.println("jwtToken : "+jwtToken);
 		
-		response.addHeader(jwtProperties.HEADER_STRING, jwtProperties.TOKEN_PREFIX+jwtToken); // Bearer하고 띄어쓰기 필수 (스페이스)
+        response.addHeader(jwtProperties.HEADER_STRING, jwtProperties.TOKEN_PREFIX+jwtToken); // Bearer하고 띄어쓰기 필수 (스페이스)
 	}
 	
 }
