@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { userInfo } from "os";
 import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
 import { asyncState, AsyncState, createAsyncReducer } from "./util";
 
@@ -19,16 +20,23 @@ export interface LogInResProfile {
   accessToken: string,
 }
 
+export interface UserInfoProfile {
+  username: string,
+  email:string
+}
+
 //state
 export type UserState = {
-  login: AsyncState<LogInResProfile,Error>
+  login: AsyncState<LogInResProfile, Error>
+  userInfo: AsyncState<UserInfoProfile, Error>
 }
 
 
 
 //initialStat
 const initialState: UserState = {
-  login: asyncState.initial()
+  login: asyncState.initial(),
+  userInfo: asyncState.initial()
 }
 
 
@@ -40,6 +48,10 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
+
+export const USER_INFO_REQUEST = 'USER_INFO_REQUEST'
+export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS'
+export const USER_INFO_FAILURE = 'USER_INFO_FAILURE'
 
 
 //action
@@ -65,6 +77,15 @@ export const logInRequestAction =(payload: any)=>({
 
 export type LogInAction = ActionType<typeof logInAsync>
 
+export const userInfoAsync = createAsyncAction(
+  USER_INFO_REQUEST,
+  USER_INFO_SUCCESS,
+  USER_INFO_FAILURE
+)<string, UserInfoProfile, AxiosError>()
+
+export type UserInfoAction = ActionType<typeof userInfoAsync>
+
+
 
 //reducer
 
@@ -85,8 +106,7 @@ const user = createReducer<UserState>(initialState, {
     ...state,
     login: asyncState.load()
   }),
-  [LOG_IN_SUCCESS]: (state, action) => (console.log(action.payload),
-    {
+  [LOG_IN_SUCCESS]: (state, action) => ({
     ...state,
     login: asyncState.success(action.payload)
     

@@ -10,13 +10,12 @@ async function signUpAPI(payload:any) {
 }
 
 async function logInAPI(payload:any) {
-  const response = await axios
-    .post<LogInResProfile>('/login', payload)
-    .then((res)=>{  
-      if(res.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(res.data))
-      }
-      return res.data
+  const response = await axios.post<LogInResProfile>('/login', payload).then((res)=>{  
+      console.log(res.headers)
+      // if(res.data.accessToken) {
+      //   localStorage.setItem("token", JSON.stringify(res.data.accessToken))
+      // }
+      return res.headers
     })
   return response
 }
