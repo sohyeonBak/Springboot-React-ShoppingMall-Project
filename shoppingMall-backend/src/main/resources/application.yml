@@ -49,7 +49,7 @@ spring:
             - account_email
             client-name: Kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8000/login/oauth2/code/kakao
+            redirect-uri: http://localhost:3000/login/oauth2/code/kakao
             
           naver:
             client-id: qHu_kSd83pEJqvuS9nMg
