@@ -29,8 +29,8 @@ export const asyncState = {
   }),
   success: <T, E = any>(data: T): AsyncState<T, E> => ({
     loading: false,
-    done: false,
-    data,
+    done: true,
+    data: data || null,
     error: null
   }),
   error: <T, E>(error: E): AsyncState<T, E> => ({

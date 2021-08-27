@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { useState,useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
+import { RootState } from '../../reducers';
 import { logInRequestAction } from '../../reducers/user';
 
 type LogInState = {
@@ -10,6 +13,13 @@ type LogInState = {
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const { done } = useSelector((state:RootState)=> state.user.login)
+  const history = useHistory()
+  useEffect(()=>{
+    if(done){
+      history.push('/')
+    }
+  },[done])
 
   const onUsername = (e: any) => {
     setUsername(e.target.value)
@@ -25,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     const login: LogInState={username,password}
     dispatch(logInRequestAction(login))
-    console.log(login)
+
   },[username,password])
 
   return (
@@ -34,7 +44,7 @@ const Login = () => {
         <form className="auth-feilds" >
           <input type="text" placeholder="아이디" value={username} onChange={onUsername} name='username' ></input>
           <br />
-          <input type="text" placeholder="비밀번호" value={password} onChange={onPassword} name='password' ></input>
+          <input type="password" placeholder="비밀번호" value={password} onChange={onPassword} name='password' ></input>
           <br />
           <button onClick={onAddLogIN}>확인</button>
           <br />
