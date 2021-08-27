@@ -1,6 +1,9 @@
 package com.yh.shopping.config.oauth;
 
+import java.util.Date;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +13,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.yh.shopping.config.JwtProperties;
 import com.yh.shopping.config.auth.PrincipalDetails;
 import com.yh.shopping.config.oauth.provider.FacebookUserInfo;
 import com.yh.shopping.config.oauth.provider.GoogleUserInfo;
@@ -28,6 +34,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 	
 	@Autowired
 	private UserRepository userRepositoy;
+	
+	@Autowired
+	HttpServletResponse response;
+	
+	private  JwtProperties jwtProperties;
 	
 	// 구글로 부터 받은 userRequest 데이터에 대한 후처리되는 함수
 	// 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
@@ -64,6 +75,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		System.out.println("getEmail : "+ oAuth2UserInfo.getEmail());
 		System.out.println("getProviderId : "+ oAuth2UserInfo.getProviderId());
 		
+		
 		String provider = oAuth2UserInfo.getProvider(); // google
 		String providerId = oAuth2UserInfo.getProviderId();
 		String username = provider+"_"+providerId; // google_112188858007110237324
@@ -72,7 +84,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		RoleType role = RoleType.ROLE_USER;
 		
 		User userEntity = userRepositoy.findByUsername(username);
-				
+		
 		
 		if(userEntity == null) {
 			System.out.println("OAuth 로그인이 최초입니다.");
@@ -86,6 +98,16 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 					.build();
 			userRepositoy.save(userEntity);
 		}
+		
+		String jwtToken = JWT.create()
+                .withSubject("jwt토큰")
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.EXPIRATION_TIME)) // 현재시간 + 3시간 만료 시간 (1000 = 1초)
+                .withClaim("id", userEntity.getId())
+                .withClaim("username", oAuth2UserInfo.getName())
+                .sign(Algorithm.HMAC512(jwtProperties.SECRET));
+		
+		System.out.println("jwtToken : "+jwtToken);
+		response.addHeader(jwtProperties.HEADER_STRING, jwtProperties.TOKEN_PREFIX+jwtToken);
 		
 		return new PrincipalDetails(userEntity, oauth2User.getAttributes());
 	}
