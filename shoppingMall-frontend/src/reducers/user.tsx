@@ -17,7 +17,11 @@ export interface LogInReqProfile {
 }
 
 export interface LogInResProfile {
-  accessToken: string,
+  authorization: string,
+}
+
+export interface LogOutProfile {
+  authorization: null,
 }
 
 export interface UserInfoProfile {
@@ -27,6 +31,7 @@ export interface UserInfoProfile {
 
 //state
 export type UserState = {
+  signup:AsyncState<SignUpProfile, Error>
   login: AsyncState<LogInResProfile, Error>
   userInfo: AsyncState<UserInfoProfile, Error>
 }
@@ -35,6 +40,7 @@ export type UserState = {
 
 //initialStat
 const initialState: UserState = {
+  signup:asyncState.initial(),
   login: asyncState.initial(),
   userInfo: asyncState.initial()
 }
@@ -48,6 +54,10 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
+
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
+export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'
 
 export const USER_INFO_REQUEST = 'USER_INFO_REQUEST'
 export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS'
@@ -76,6 +86,19 @@ export const logInRequestAction =(payload: any)=>({
 })
 
 export type LogInAction = ActionType<typeof logInAsync>
+
+export const logOutAsync = createAsyncAction(
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE
+)<string, LogOutProfile, AxiosError>()
+
+export const logOutRequestAction =()=>({
+  type: LOG_OUT_REQUEST,
+})
+
+export type LogOutAction = ActionType<typeof logOutAsync>
+
 
 export const userInfoAsync = createAsyncAction(
   USER_INFO_REQUEST,
@@ -108,10 +131,21 @@ const user = createReducer<UserState>(initialState, {
   }),
   [LOG_IN_SUCCESS]: (state, action) => ({
     ...state,
-    login: asyncState.success(action.payload)
-    
+    login: asyncState.success(action.payload),
   }),
   [LOG_IN_FAILURE]: (state, action) => ({
+    ...state,
+    login: asyncState.error(action.payload)
+  }),
+  [LOG_OUT_REQUEST]: state => ({
+    ...state,
+    login: asyncState.load()
+  }),
+  [LOG_OUT_SUCCESS]: (state, action) => ({
+    ...state,
+    login: asyncState.success(action.payload),
+  }),
+  [LOG_OUT_FAILURE]: (state, action) => ({
     ...state,
     login: asyncState.error(action.payload)
   }),

@@ -23,7 +23,7 @@ const Auth = () => {
           </ul>
         </div>
         {auth
-          ?<Login />
+          ?<Login  />
           :<Signup />
         }
       </div>

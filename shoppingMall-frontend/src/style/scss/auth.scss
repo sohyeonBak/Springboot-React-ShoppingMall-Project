@@ -100,26 +100,37 @@
     .sign-contents {
       display: flex;
       justify-content: center;
-      .sign-feilds {
+      .sign-zone {
         width: 300px;
-        margin-top: 3rem;
-        padding-left: 1.5rem;
-        box-sizing: border-box;
-        input {
-          border: 1px solid $element2;
-          width: 250px;
-          height: 40px;
-          margin-bottom: 0.8rem;
-          padding-left: 0.5rem;
+        .sign-feilds {
+          margin-top: 3rem;
+          padding-left: 1.5rem;
           box-sizing: border-box;
+          input {
+            border: 1px solid $element2;
+            width: 250px;
+            height: 40px;
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+            box-sizing: border-box;
+          }
+          button {
+            display: inline-block;
+            width: 250px;
+            height: 40px;
+            margin-top: 0.5rem;
+            background-color: $element2;
+            color: #fff;
+          }
         }
-        button {
-          display: inline-block;
-          width: 250px;
-          height: 40px;
-          margin-top: 0.5rem;
-          background-color: $element2;
-          color: #fff;
+        .sign-confirm {
+          padding-top: 1rem;
+          padding-left: 1.5rem;
+          p {
+            font-family: $defaultTxtFont;
+            font-size: 14px;
+            font-weight: 600;
+          }
         }
       }
     }
