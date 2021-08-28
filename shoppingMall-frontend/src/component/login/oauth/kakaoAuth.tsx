@@ -16,7 +16,7 @@ const KakaoAuth = () => {
   },[])
   return (
     <div>
-      로딩중 ..
+      로딩중 ...
     </div>
   );
 };
