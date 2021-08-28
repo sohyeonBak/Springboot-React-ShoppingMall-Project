@@ -40,11 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	  @Bean
-	  public HttpFirewall defaultHttpFirewall() {
-	    return new DefaultHttpFirewall();
-	  }
 	  
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
