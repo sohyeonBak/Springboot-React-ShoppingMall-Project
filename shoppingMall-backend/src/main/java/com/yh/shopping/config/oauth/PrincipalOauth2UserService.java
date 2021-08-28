@@ -26,6 +26,7 @@ import com.yh.shopping.model.RoleType;
 import com.yh.shopping.model.user.User;
 import com.yh.shopping.repository.user.UserRepository;
 
+
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 	
