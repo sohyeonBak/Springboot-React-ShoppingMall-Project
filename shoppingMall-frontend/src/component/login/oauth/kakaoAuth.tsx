@@ -5,10 +5,14 @@ import { kakaoLogInRequestAction } from '../../../reducers/user';
 
 const KakaoAuth = () => {
   const code = new URL(window.location.href).searchParams.get("code")
+  const state = new URL(window.location.href).searchParams.get("state")
   console.log(code)
+  let states = state?.substring(0,state.length-1)+'%3D'
+  console.log(states)
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(kakaoLogInRequestAction(code))
+    const key = {code, states}
+    dispatch(kakaoLogInRequestAction(key))
   },[])
   return (
     <div>
