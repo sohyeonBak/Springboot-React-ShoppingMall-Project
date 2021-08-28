@@ -16,6 +16,11 @@ export interface LogInReqProfile {
   password: string,
 }
 
+export interface KakaoLogInReqProfile {
+  code: string,
+}
+
+
 export interface LogInResProfile {
   authorization: string,
 }
@@ -24,16 +29,11 @@ export interface LogOutProfile {
   authorization: null,
 }
 
-export interface UserInfoProfile {
-  username: string,
-  email:string
-}
 
 //state
 export type UserState = {
   signup:AsyncState<SignUpProfile, Error>
   login: AsyncState<LogInResProfile, Error>
-  userInfo: AsyncState<UserInfoProfile, Error>
 }
 
 
@@ -42,7 +42,6 @@ export type UserState = {
 const initialState: UserState = {
   signup:asyncState.initial(),
   login: asyncState.initial(),
-  userInfo: asyncState.initial()
 }
 
 
@@ -55,13 +54,13 @@ export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
 
+export const KAKAO_LOG_IN_REQUEST = 'KAKAO_LOG_IN_REQUEST'
+export const KAKAO_LOG_IN_SUCCESS = 'KAKAO_LOG_IN_SUCCESS'
+export const KAKAO_LOG_IN_FAILURE = 'KAKAO_LOG_IN_FAILURE'
+
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'
-
-export const USER_INFO_REQUEST = 'USER_INFO_REQUEST'
-export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS'
-export const USER_INFO_FAILURE = 'USER_INFO_FAILURE'
 
 
 //action
@@ -87,6 +86,23 @@ export const logInRequestAction =(payload: any)=>({
 
 export type LogInAction = ActionType<typeof logInAsync>
 
+
+export const kakaoLogInAsync = createAsyncAction(
+  KAKAO_LOG_IN_REQUEST,
+  KAKAO_LOG_IN_SUCCESS,
+  KAKAO_LOG_IN_FAILURE
+)<KakaoLogInReqProfile, LogInResProfile, AxiosError>()
+
+export const kakaoLogInRequestAction =(payload: any)=>({
+  type: KAKAO_LOG_IN_REQUEST,
+  payload
+})
+
+export type KakaoLogInAction = ActionType<typeof kakaoLogInAsync>
+
+
+
+
 export const logOutAsync = createAsyncAction(
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
@@ -98,16 +114,6 @@ export const logOutRequestAction =()=>({
 })
 
 export type LogOutAction = ActionType<typeof logOutAsync>
-
-
-export const userInfoAsync = createAsyncAction(
-  USER_INFO_REQUEST,
-  USER_INFO_SUCCESS,
-  USER_INFO_FAILURE
-)<string, UserInfoProfile, AxiosError>()
-
-export type UserInfoAction = ActionType<typeof userInfoAsync>
-
 
 
 //reducer
@@ -134,6 +140,18 @@ const user = createReducer<UserState>(initialState, {
     login: asyncState.success(action.payload),
   }),
   [LOG_IN_FAILURE]: (state, action) => ({
+    ...state,
+    login: asyncState.error(action.payload)
+  }),
+  [KAKAO_LOG_IN_REQUEST]: state => ({
+    ...state,
+    login: asyncState.load()
+  }),
+  [KAKAO_LOG_IN_SUCCESS]: (state, action) => ({
+    ...state,
+    login: asyncState.success(action.payload),
+  }),
+  [KAKAO_LOG_IN_FAILURE]: (state, action) => ({
     ...state,
     login: asyncState.error(action.payload)
   }),

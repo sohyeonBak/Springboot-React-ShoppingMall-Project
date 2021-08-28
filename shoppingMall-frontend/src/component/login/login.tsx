@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
+import { Link, RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import { RootState } from '../../reducers';
 import { logInRequestAction } from '../../reducers/user';
 
@@ -53,9 +53,9 @@ const Login = () => {
       </div>
       <div className="auth-api">
         <ul className="api-list">
-          <li><img src="" alt="" />구글</li>
+          <li>구글</li>  
           <li><img src="" alt="" />페이스북</li>
-          <li><img src="" alt="" />카카오</li>
+          <li><a href={'http://localhost:8000/oauth2/authorization/kakao'}>카카오</a></li>
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>

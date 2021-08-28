@@ -1,6 +1,6 @@
 import axios from "axios";
 import { all, fork, takeLatest } from "redux-saga/effects";
-import { logInAsync, LogInResProfile, logOutAsync, LogOutProfile, LOG_IN_REQUEST, LOG_OUT_REQUEST, signUpAsync, SignUpProfile, SIGN_UP_REQUEST } from "../reducers/user";
+import { kakaoLogInAsync, KAKAO_LOG_IN_REQUEST, logInAsync, LogInResProfile,  LOG_IN_REQUEST, signUpAsync, SignUpProfile, SIGN_UP_REQUEST } from "../reducers/user";
 import { createAsyncSaga } from "./util";
 
 
@@ -20,10 +20,26 @@ async function logInAPI(payload:any) {
   return response
 }
 
+async function kakaologInAPI(payload:any) {
+  console.log(payload)
+  const response = await axios.get<LogInResProfile>(`/login/oauth2/code/kakao?code=${payload}`)
+  .then((res)=>{  
+    console.log(res)
+      if(res.headers.authorization) {
+        localStorage.setItem("token", JSON.stringify(res.headers.authorization))
+      }
+      return res.headers
+    })
+    
+  return response
+}
+
+
+
 
 const getSignUpSaga = createAsyncSaga(signUpAsync, signUpAPI)
 const getLogInSaga = createAsyncSaga(logInAsync, logInAPI)
-
+const getKakaoLogInSaga = createAsyncSaga(kakaoLogInAsync, kakaologInAPI)
 
 
 function* watchSignUp(){
@@ -34,11 +50,16 @@ function* watchLogIn(){
   yield takeLatest(LOG_IN_REQUEST, getLogInSaga)
 }
 
+function* watchKakaoLogIn(){
+  yield takeLatest(KAKAO_LOG_IN_REQUEST, getKakaoLogInSaga)
+}
+
 
 export default function* userSaga() {
   yield all([
     fork(watchSignUp),
     fork(watchLogIn),
+    fork(watchKakaoLogIn),
 
   ])
 }
