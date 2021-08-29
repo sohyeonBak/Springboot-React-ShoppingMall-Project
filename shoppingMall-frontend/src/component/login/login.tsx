@@ -3,7 +3,7 @@ import { useState,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import { RootState } from '../../reducers';
-import { logInRequestAction } from '../../reducers/user';
+import { kakaoLogInRequestAction, logInRequestAction } from '../../reducers/user';
 
 type LogInState = {
   username: string,
@@ -37,6 +37,11 @@ const Login = () => {
     dispatch(logInRequestAction(login))
 
   },[username,password])
+  
+  const onKakaoLogin = useCallback(()=>{
+    console.log('디스패치 성공')
+    dispatch(kakaoLogInRequestAction())
+  },[])
 
   return (
     <>
@@ -55,7 +60,7 @@ const Login = () => {
         <ul className="api-list">
           <li>구글</li>  
           <li><img src="" alt="" />페이스북</li>
-          <li><a href={'http://localhost:8000/oauth2/authorization/kakao'}>카카오</a></li>
+          <li><button onClick={onKakaoLogin}>카카오</button></li>
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
