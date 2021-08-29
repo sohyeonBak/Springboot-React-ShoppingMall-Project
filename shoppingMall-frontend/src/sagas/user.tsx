@@ -22,8 +22,8 @@ async function logInAPI(payload:any) {
 }
 
 async function kakaologInAPI(payload:any) {
-  console.log('네트워크 전송')
-  const response = await axios.get<LogInResProfile>('/oauth2/authorization/kakao')
+  console.log(payload)
+  const response = await axios.get<LogInResProfile>('/oauthLogin', payload)
   .then((res)=>{  
     console.log(res)
       if(res.headers.authorization) {

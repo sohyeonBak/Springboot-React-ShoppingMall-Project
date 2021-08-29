@@ -93,8 +93,9 @@ export const kakaoLogInAsync = createAsyncAction(
   KAKAO_LOG_IN_FAILURE
 )<KakaoLogInReqProfile, LogInResProfile, AxiosError>()
 
-export const kakaoLogInRequestAction =()=>({
+export const kakaoLogInRequestAction =(payload:any)=>({
   type: KAKAO_LOG_IN_REQUEST,
+  payload
 })
 
 export type KakaoLogInAction = ActionType<typeof kakaoLogInAsync>
