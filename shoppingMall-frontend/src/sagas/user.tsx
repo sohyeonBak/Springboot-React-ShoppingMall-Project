@@ -21,15 +21,15 @@ async function logInAPI(payload:any) {
   return response
 }
 
-async function kakaologInAPI(payload:any) {
-  console.log(payload)
-  const response = await axios.get<LogInResProfile>('/oauthLogin', payload)
+async function kakaologInAPI() {
+  console.log('데이터')
+  const response = await axios.get<LogInResProfile>('/oauthLogin')
   .then((res)=>{  
     console.log(res)
-      if(res.headers.authorization) {
-        localStorage.setItem("token", JSON.stringify(res.headers.authorization))
+      if(res.data.authorization) {
+        localStorage.setItem("token", JSON.stringify(res.data.authorization))
       }
-      return res.headers
+      return res.data
     })
     
   return response
