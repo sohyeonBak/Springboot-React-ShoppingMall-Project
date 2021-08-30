@@ -9,11 +9,16 @@ const KakaoAuth = () => {
   // console.log(code)
   // let state = states?.substring(0,states.length-1)+'%3D'
   // console.log(state)
-  // const dispatch = useDispatch()
   // useEffect(()=>{
-  //   const key = {code, state}
-  //   dispatch(kakaoLogInRequestAction(key))
-  // },[])
+    //   const key = {code, state}
+    //   dispatch(kakaoLogInRequestAction(key))
+    // },[])
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      dispatch(kakaoLogInRequestAction())
+    },[])
+    
   return (
     <div>
       로딩중 ..
