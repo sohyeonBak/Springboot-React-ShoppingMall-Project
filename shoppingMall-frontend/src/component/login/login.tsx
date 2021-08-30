@@ -36,6 +36,10 @@ const Login = () => {
     const login: LogInState={username,password}
     dispatch(logInRequestAction(login))
   },[username,password])
+
+  const onKaKaoLogin = useCallback(()=>{
+    dispatch(kakaoLogInRequestAction())
+  },[])
   
 
   return (
@@ -55,7 +59,7 @@ const Login = () => {
         <ul className="api-list">
           <li>구글</li>  
           <li><img src="" alt="" />페이스북</li>
-          <li><a href="http://localhost:8000/oauth2/authorization/kakao">카카오</a></li>
+          <li><a href="http://localhost:8000/oauth2/authorization/kakao" onClick={onKaKaoLogin}>카카오</a></li>
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
