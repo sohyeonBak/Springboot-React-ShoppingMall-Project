@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '../../reducers';
 import { kakaoLogInRequestAction, logInRequestAction } from '../../reducers/user';
 
@@ -37,7 +37,8 @@ const Login = () => {
     dispatch(logInRequestAction(login))
   },[username,password])
 
-  
+
+  const kakaoOauth = `https://kauth.kakao.com/oauth/authorize?client_id=9f2407a32eb59fd6f8274ae8c537b676&redirect_uri=http://localhost:3000/login/oauth2/code/kakao&response_type=code`
 
   return (
     <>
@@ -56,7 +57,7 @@ const Login = () => {
         <ul className="api-list">
           <li>구글</li>  
           <li><img src="" alt="" />페이스북</li>
-          <li><a href="http://localhost:8000/oauth2/authorization/kakao" >카카오</a></li>
+          <li><a href={kakaoOauth} >카카오</a></li>
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
