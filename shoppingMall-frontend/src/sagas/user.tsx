@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { all, fork, takeLatest } from "redux-saga/effects";
-import { kakaoLogInAsync, KAKAO_LOG_IN_REQUEST, logInAsync, LogInResProfile,  LOG_IN_REQUEST, signUpAsync, SignUpProfile, SIGN_UP_REQUEST } from "../reducers/user";
+import { kakaoLogInAsync, KakaoLogInResProfile, KAKAO_LOG_IN_REQUEST, logInAsync, LogInResProfile,  LOG_IN_REQUEST, signUpAsync, SignUpProfile, SIGN_UP_REQUEST } from "../reducers/user";
 import { createAsyncSaga } from "./util";
 
 
@@ -21,13 +21,13 @@ async function logInAPI(payload:any) {
   return response
 }
 
-async function kakaologInAPI() {
-  console.log('데이터')
-  const response = await axios.get<LogInResProfile>('/oauthLogin')
+async function kakaologInAPI(payload:any) {
+  console.log(payload)
+  const response = await axios.get<KakaoLogInResProfile>(`/login/oauth2/code/kakao?code=${payload}`)
   .then((res)=>{  
     console.log(res)
-      if(res.data.authorization) {
-        localStorage.setItem("token", JSON.stringify(res.data.authorization))
+      if(res.data.accessToken) {
+        localStorage.setItem("token", JSON.stringify(res.data.accessToken))
       }
       return res.data
     })
