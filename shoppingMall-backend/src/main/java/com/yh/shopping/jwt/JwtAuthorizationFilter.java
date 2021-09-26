@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import com.yh.shopping.config.JwtProperties;
 import com.yh.shopping.config.auth.PrincipalDetails;
 import com.yh.shopping.model.user.User;
 import com.yh.shopping.repository.user.UserRepository;
+import com.yh.shopping.service.user.UserService;
 
 // 시큐리티가 filter 가지고 있는데 그 필터중에 BasicAuthenticationFilter 라는 것이 있음.
 // 권한이나 인증이 필요한 특정 주소를 요청했을 때 위 필터를 무조건 타게 되어있음.
@@ -28,6 +30,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 	private UserRepository userRepository;
 	private JwtProperties jwtProperties;
 
+	@Autowired
+	private UserService userService;
+	
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
 		super(authenticationManager);
 		this.userRepository = userRepository;
@@ -57,7 +62,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 		
 		// 서명이 정상적으로 됨
 		if(username != null) {
-			User userEntity = userRepository.findByUsername(username);
+			User userEntity = userService.회원찾기(username);
 			
 			PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
 			

@@ -25,6 +25,7 @@ import com.yh.shopping.config.oauth.provider.OAuth2UserInfo;
 import com.yh.shopping.model.RoleType;
 import com.yh.shopping.model.user.User;
 import com.yh.shopping.repository.user.UserRepository;
+import com.yh.shopping.service.user.UserService;
 
 
 @Service
@@ -38,6 +39,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 	
 	@Autowired
 	HttpServletResponse response;
+	
+	@Autowired
+	private UserService userService;
 	
 	private  JwtProperties jwtProperties;
 	
@@ -84,7 +88,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		String email = oAuth2UserInfo.getEmail();
 		RoleType role = RoleType.ROLE_USER;
 		
-		User userEntity = userRepositoy.findByUsername(username);
+		User userEntity =userService.회원찾기(username);
 		
 		
 		if(userEntity == null) {

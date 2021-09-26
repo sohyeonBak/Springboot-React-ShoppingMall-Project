@@ -1,10 +1,12 @@
 import React from 'react';
+import {AdminProps} from '../admin/admin.js'
 
-const Categories = () => {
+const Categories = (categoryClick: AdminProps[`adminSelect`]) => {
+  console.log(categoryClick===true)
   return (
-    <li>
-      
-    </li>
+    <div className={categoryClick===true?'show':''}>
+      hi
+    </div>
   );
 };
 
