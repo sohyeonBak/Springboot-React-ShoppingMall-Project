@@ -1,11 +1,12 @@
 import React from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
-import '../../style/scss/auth.scss'
+import { Switch, Route } from 'react-router-dom';
+import '../../../style/scss/auth.scss'
 import Login from './login';
 import Signup from './signup';
 
-const Auth = () => {
+const SignIn = () => {
   const [ auth, setAuth ]= useState(true);
   const onLogin = useCallback(()=>{
     setAuth(true)
@@ -22,13 +23,21 @@ const Auth = () => {
             <li onClick={onSignup}>회원가입</li>
           </ul>
         </div>
-        {auth
-          ?<Login  />
+        <Switch>
+          <Route path={'/loginForm'}>
+            <Login  />
+          </Route>
+          <Route path={'/join'}>
+            <Signup />
+          </Route>
+        </Switch>
+        {/* {auth
+          ?
           :<Signup />
-        }
+        } */}
       </div>
     </div>
   )
 }
 
-export default Auth;
+export default SignIn;

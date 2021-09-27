@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { RootState } from '../../reducers';
-import { logOutRequestAction } from '../../reducers/user';
-import '../../style/scss/header.scss'
+import { RootState } from '../../../reducers';
+import { logOutRequestAction } from '../../../reducers/user';
+import '../../../style/scss/header.scss'
 import CategoryList from './category-list';
 import SearchForm from './search-form';
 

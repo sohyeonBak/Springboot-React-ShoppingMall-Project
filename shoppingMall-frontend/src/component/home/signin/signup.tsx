@@ -4,8 +4,8 @@ import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { RootState } from '../../reducers';
-import { signUpAsync } from '../../reducers/user';
+import { RootState } from '../../../reducers';
+import { signUpAsync } from '../../../reducers/user';
 
 type userInfo ={
   email: string,

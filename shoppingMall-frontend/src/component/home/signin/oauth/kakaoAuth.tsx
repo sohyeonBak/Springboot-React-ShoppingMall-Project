@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { kakaoLogInRequestAction } from '../../../reducers/user';
+import { kakaoLogInRequestAction } from '../../../../reducers/user';
 
 const KakaoAuth = () => {
   const code = new URL(window.location.href).searchParams.get("code")

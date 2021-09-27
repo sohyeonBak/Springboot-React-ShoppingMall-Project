@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useState,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { RootState } from '../../reducers';
-import { kakaoLogInRequestAction, logInRequestAction } from '../../reducers/user';
+import { RootState } from '../../../reducers';
+import { kakaoLogInRequestAction, logInRequestAction } from '../../../reducers/user';
 
 type LogInState = {
   username: string,
