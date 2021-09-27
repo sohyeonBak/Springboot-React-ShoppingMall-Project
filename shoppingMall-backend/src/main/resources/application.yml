@@ -73,3 +73,6 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token # 토큰 받기
             user-info-uri: https://kapi.kakao.com/v2/user/me # 프로필 정보 받기
             user-name-attribute: id # 회원정보를 json으로 받는데 response라는 키값으로 네이버가 리턴해줌.
+            
+yh:
+  key: 1234 

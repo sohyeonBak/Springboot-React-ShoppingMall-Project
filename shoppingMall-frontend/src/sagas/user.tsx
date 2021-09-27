@@ -23,7 +23,7 @@ async function logInAPI(payload:any) {
 
 async function kakaologInAPI(payload:any) {
   console.log(payload)
-  const response = await axios.get<KakaoLogInResProfile>(`/login/oauth2/code/kakao?code=${payload}`)
+  const response = await axios.get<KakaoLogInResProfile>(`/auth/kakao/callback?code=${payload}`)
   .then((res)=>{  
     console.log(res)
       if(res.data.accessToken) {
