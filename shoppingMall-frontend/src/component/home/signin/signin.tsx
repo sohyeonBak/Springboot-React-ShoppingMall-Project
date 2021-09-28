@@ -23,18 +23,11 @@ const SignIn = () => {
             <li onClick={onSignup}>회원가입</li>
           </ul>
         </div>
-        <Switch>
-          <Route path={'/loginForm'}>
-            <Login  />
-          </Route>
-          <Route path={'/join'}>
-            <Signup />
-          </Route>
-        </Switch>
-        {/* {auth
-          ?
+        
+        {auth
+          ?<Login  />
           :<Signup />
-        } */}
+        }
       </div>
     </div>
   )

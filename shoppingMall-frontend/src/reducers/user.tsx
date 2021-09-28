@@ -1,7 +1,6 @@
 import { AxiosError } from "axios";
-import { userInfo } from "os";
 import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
-import { asyncState, AsyncState, createAsyncReducer } from "./util";
+import { asyncState, AsyncState } from "./util";
 
 
 //type
@@ -22,7 +21,7 @@ export interface KakaoLogInReqProfile {
 
 
 export interface KakaoLogInResProfile {
-  accessToken: string,
+  authorization: string,
 }
 
 
