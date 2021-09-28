@@ -14,7 +14,7 @@ const KakaoAuth = () => {
   const dispatch = useDispatch()
   useEffect(()=>{
       dispatch(kakaoLogInRequestAction(code))
-    },[])
+    },[code])
 
     
   return (

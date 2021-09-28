@@ -57,7 +57,7 @@ const Login = () => {
         <ul className="api-list">
           <li>구글</li>  
           <li><img src="" alt="" />페이스북</li>
-          <li><a href={kakaoOauth} >카카오</a></li>
+          <li><a href={kakaoOauth}>카카오</a></li>
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
