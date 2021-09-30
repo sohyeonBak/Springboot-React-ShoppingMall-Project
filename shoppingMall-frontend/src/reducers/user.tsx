@@ -15,8 +15,12 @@ export interface LogInReqProfile {
   password: string,
 }
 
+export interface LogInResProfile {
+  authorization: string,
+}
+
 export interface KakaoLogInReqProfile {
-  code: string,
+  payload: string,
 }
 
 
@@ -24,10 +28,6 @@ export interface KakaoLogInResProfile {
   authorization: string,
 }
 
-
-export interface LogInResProfile {
-  authorization: string,
-}
 
 export interface LogOutProfile {
   authorization: null,
@@ -38,14 +38,16 @@ export interface LogOutProfile {
 export type UserState = {
   signup:AsyncState<SignUpProfile, Error>
   login: AsyncState<LogInResProfile, Error>
+  logout: AsyncState<LogOutProfile, Error>
 }
 
 
 
 //initialStat
 const initialState: UserState = {
-  signup:asyncState.initial(),
+  signup: asyncState.initial(),
   login: asyncState.initial(),
+  logout: asyncState.initial(),
 }
 
 
@@ -105,8 +107,6 @@ export const kakaoLogInRequestAction =(payload:any)=>({
 export type KakaoLogInAction = ActionType<typeof kakaoLogInAsync>
 
 
-
-
 export const logOutAsync = createAsyncAction(
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
@@ -161,15 +161,15 @@ const user = createReducer<UserState>(initialState, {
   }),
   [LOG_OUT_REQUEST]: state => ({
     ...state,
-    login: asyncState.load()
+    logout: asyncState.load()
   }),
   [LOG_OUT_SUCCESS]: (state, action) => ({
     ...state,
-    login: asyncState.success(action.payload),
+    logout: asyncState.success(action.payload),
   }),
   [LOG_OUT_FAILURE]: (state, action) => ({
     ...state,
-    login: asyncState.error(action.payload)
+    logout: asyncState.error(action.payload)
   }),
 })
 

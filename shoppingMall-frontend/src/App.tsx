@@ -1,6 +1,6 @@
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 import Header from "./component/home/header/header"
-import Home from "./component/home/home"
+import Home from "./component/home/main/home"
 import SignIn from "./component/home/signin/signin";
 import MyInfo from "./component/home/mypage/myinfo";
 import ShoppingBasket from "./component/home/shopping-basket/shopping-basket";
@@ -20,18 +20,18 @@ function App() {
         <Route path='/loginForm' >
           <SignIn />
         </Route>
+        <Route path='/login/oauth2/code/kakao' >
+          <KakaoAuth />
+        </Route>
+        <Route path='/join'>
+            <Signup />
+        </Route>
         <Route path='/myshop' >
           <ShoppingBasket />
         </Route>
         <Route path='/mypage' >
           <MyInfo />
         </Route>
-        <Route path='/login/oauth2/code/kakao' >
-          <KakaoAuth />
-        </Route>
-        <Route path='/join'>
-            <Signup />
-          </Route>
       </Switch>
     </BrowserRouter>
     </>

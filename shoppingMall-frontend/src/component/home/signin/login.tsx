@@ -3,7 +3,7 @@ import { useState,useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { RootState } from '../../../reducers';
-import { kakaoLogInRequestAction, logInRequestAction } from '../../../reducers/user';
+import { logInRequestAction } from '../../../reducers/user';
 
 type LogInState = {
   username: string,
@@ -39,7 +39,6 @@ const Login = () => {
 
 
   const kakaoOauth = `https://kauth.kakao.com/oauth/authorize?client_id=9f2407a32eb59fd6f8274ae8c537b676&redirect_uri=http://localhost:3000/login/oauth2/code/kakao&response_type=code`
-
   return (
     <>
       <div className="auth-contents">

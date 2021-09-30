@@ -14,7 +14,7 @@ import SearchForm from './search-form';
 const Header = () => {
   const [category, setCategory] = useState(false)
   const [search, setSearch] = useState(false)
-  const { data } = useSelector((state: RootState) => state.user.login)
+  const { done } = useSelector((state: RootState) => state.user.logout)
   let user = localStorage.getItem('token')
   const dispatch = useDispatch();
 
@@ -29,7 +29,9 @@ const Header = () => {
 
   const onLogout = useCallback(() => {
     dispatch(logOutRequestAction())
-    localStorage.removeItem('token')
+    if(done){
+      localStorage.removeItem('token')
+    }
   }, [])
 
   return (
@@ -56,7 +58,8 @@ const Header = () => {
                 검색
               </a>
             </li>
-            {user !== null ? <li className="logout" onClick={onLogout}>로그아웃</li> : <li>
+            {user !== null ? <li className="logout" onClick={onLogout}>로그아웃</li> 
+            : <li>
               <Link to={'/loginForm'}>로그인</Link>
             </li>}
             <li>

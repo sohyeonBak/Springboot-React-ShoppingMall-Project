@@ -1,21 +1,25 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { RootState } from '../../../../reducers';
 import { kakaoLogInRequestAction } from '../../../../reducers/user';
 
 const KakaoAuth = () => {
-  const code = new URL(window.location.href).searchParams.get("code")
-  console.log(code)
+  const payload = new URL(window.location.href).searchParams.get("code")
+  const dispatch = useDispatch();
   
-  // const states = new URL(window.location.href).searchParams.get("state")
-  // let state = states?.substring(0,states.length-1)+'%3D'
-  // console.log(state)
+  const { done } = useSelector((state:RootState)=> state.user.login)
+  const history = useHistory();
 
-  const dispatch = useDispatch()
-  useEffect(()=>{
-      dispatch(kakaoLogInRequestAction(code))
-    },[code])
+  useEffect(() => {
+    dispatch(kakaoLogInRequestAction(payload))
+    if(done){
+      history.push('/')
+    }
+  },[done])
 
+  
     
   return (
     <div>

@@ -23,7 +23,7 @@ export function createAsyncSaga<T1, P1, T2, P2, T3, P3>(
           ? yield call(promiseCreator, action.payload)
           : yield call(promiseCreator);
         yield put(asyncActionCreator.success(response))
-      }catch(e) {
+      }catch(e:any) {
         yield put(asyncActionCreator.failure(e))
       }
     }
