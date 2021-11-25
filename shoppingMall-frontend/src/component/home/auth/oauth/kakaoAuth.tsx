@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -6,18 +5,18 @@ import { RootState } from '../../../../reducers';
 import { kakaoLogInRequestAction } from '../../../../reducers/user';
 
 const KakaoAuth = () => {
-  const payload = new URL(window.location.href).searchParams.get("code")
+  const code = new URL(window.location.href).searchParams.get("code")
   const dispatch = useDispatch();
   
   const { done } = useSelector((state:RootState)=> state.user.login)
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(kakaoLogInRequestAction(payload))
+    dispatch(kakaoLogInRequestAction(code))
     if(done){
       history.push('/')
     }
-  },[done])
+  },[done,code,history,dispatch])
 
   
     

@@ -1,10 +1,17 @@
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Confirm = () => {
 
+type ConfirmType = {
+  funcConfrim : (value:boolean)=>void
+}
+
+const Confirm = ({funcConfrim}:ConfirmType) => {
+  const history = useHistory()
   const onConfirm = useCallback((e:any)=>{
-
-  },[])
+    funcConfrim(false)
+    history.push('/')
+  },[history, funcConfrim])
   
   return(
     <div className="confirm">

@@ -1,57 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import ProductManagement from './product-management';
-import ProductStock from './product-stock';
+import { Route, Switch, useRouteMatch } from 'react-router';
+import { Link } from 'react-router-dom';
 import '../../style/scss/admin.scss'
 import Categories from './categories';
-
-export interface AdminProps {
-  adminSelect : boolean,
-}
+import ProductManagement from './product-management';
+import ProductStock from './product-stock';
 
 const Admin = () => {
-  const [ category, setCategory ] = useState('')
-  const [ stock, setStock ] = useState('')
-  const [ product, setProduct ] = useState('')
-
-  const [ categoryClick, setCategoryClick ] = useState<AdminProps[`adminSelect`]>(true);
-  const [ stockClick, setStockClick ] = useState<AdminProps[`adminSelect`]>(false);
-  const [ productClick, setProductClick ] = useState<AdminProps[`adminSelect`]>(false);
-  
-  const onCategory = useCallback(()=>{
-    setCategoryClick((prev)=>{
-      if(prev){
-         return true
-      }else{
-        return !prev
-      }
-    })
-    setStockClick(false)
-    setProductClick(false)
-  },[])
-const onStock = useCallback(()=>{
-  setStockClick((prev)=>{
-    if(prev){
-       return true
-    }else{
-      return !prev
-    }
-  })
-  setCategoryClick(false)
-  setProductClick(false)
-},[])
-const onProduct = useCallback(()=>{
-  setProductClick((prev)=>{
-    if(prev){
-       return true
-    }else{
-      return !prev
-    }
-  })
-  setCategoryClick(false)
-  setStockClick(false)
-},[])
+  const match = useRouteMatch();
 
   return (
     <div>
@@ -59,17 +14,31 @@ const onProduct = useCallback(()=>{
         <div className="title">
           <h2>어드민</h2>
           <ul className="admin-list">
-            <li className={categoryClick===true? 'show' : ''} onClick={onCategory}>카테고리 등록</li>
-            <li className={stockClick===true? 'show' : ''} onClick={onStock}>재고관리</li>
-            <li className={productClick===true? 'show' : ''} onClick={onProduct}>상품관리</li>
+            <li >
+              <Link to={`${match.url}`}>카테고리 등록</Link>
+            </li>
+            <li >
+              <Link to={`${match.url}/stock`}>재고관리</Link>
+            </li>
+            <li >
+              <Link to={`${match.url}/management`}>상품관리</Link>
+            </li>
           </ul>
         </div>
       </div>
       <div className="contents">
         <div className="inner">
-          <Categories {...categoryClick}/>
-          <ProductStock />
-          <ProductManagement />
+          <Switch>
+            <Route path={`${match.path}`} exact>
+              <Categories />
+            </Route>
+            <Route path={`${match.path}/stock`}>
+              <ProductStock />
+            </Route>
+            <Route path={`${match.path}/management`}>
+              <ProductManagement />
+            </Route>  
+          </Switch>
         </div>
       </div>
     </div>

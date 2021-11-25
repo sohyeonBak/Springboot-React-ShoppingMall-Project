@@ -26,8 +26,6 @@
           font-size: 14px;
           font-weight: 600;
           color: $element2;
-        }
-        li:hover {
           color: $element3;
           border-bottom: 1px solid $element3;
           padding-bottom: 0.7rem;
@@ -150,6 +148,31 @@
       top: 0;
       left: 0;
       background: rgba(0, 0, 0, 0.4);
+      .confirm-madal {
+        width: 320px;
+        height: 160px;
+        background-color: $element1;
+        text-align: center;
+        p {
+          font-family: $defaultTxtFont;
+          font-size: 16px;
+          font-weight: 400;
+          padding-top: 3rem;
+          box-sizing: border-box;
+        }
+        button {
+          display: inline-block;
+          width: 80px;
+          height: 40px;
+          border-radius: 20px;
+          background-color: lightslategrey;
+          color: #fff;
+          margin-top: 1rem;
+        }
+        button:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 }

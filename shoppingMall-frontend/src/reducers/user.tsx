@@ -20,7 +20,7 @@ export interface LogInResProfile {
 }
 
 export interface KakaoLogInReqProfile {
-  payload: string,
+  code: string,
 }
 
 
@@ -38,7 +38,6 @@ export interface LogOutProfile {
 export type UserState = {
   signup:AsyncState<SignUpProfile, Error>
   login: AsyncState<LogInResProfile, Error>
-  logout: AsyncState<LogOutProfile, Error>
 }
 
 
@@ -47,7 +46,6 @@ export type UserState = {
 const initialState: UserState = {
   signup: asyncState.initial(),
   login: asyncState.initial(),
-  logout: asyncState.initial(),
 }
 
 
@@ -161,15 +159,15 @@ const user = createReducer<UserState>(initialState, {
   }),
   [LOG_OUT_REQUEST]: state => ({
     ...state,
-    logout: asyncState.load()
+    login: asyncState.load()
   }),
   [LOG_OUT_SUCCESS]: (state, action) => ({
     ...state,
-    logout: asyncState.success(action.payload),
+    login: asyncState.success(action.payload),
   }),
   [LOG_OUT_FAILURE]: (state, action) => ({
     ...state,
-    logout: asyncState.error(action.payload)
+    login: asyncState.error(action.payload)
   }),
 })
 

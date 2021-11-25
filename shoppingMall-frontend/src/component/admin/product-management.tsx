@@ -3,7 +3,7 @@ import React from 'react';
 const ProductManagement = () => {
   return (
     <div>
-      bye
+      3
     </div>
   );
 };

@@ -50,51 +50,76 @@
   justify-content: center;
   .inner {
     width: 768px;
-    .stock-section {
-      padding-top: 3rem;
-      padding-left: 1rem;
-      box-sizing: border-box;
-      h3 {
-        font-family: $defaultNumFont;
-        font-size: 16px;
-        font-weight: 600;
-      }
-      .stock-list {
-        padding-top: 1rem;
-        width: 326px;
-        position: relative;
-        height: 100px;
-        li {
-          label {
-            display: inline-block;
-            font-family: $defaultNumFont;
-            font-size: 14px;
-            font-weight: 400;
-            width: 70px;
-            padding-bottom: 1rem;
-          }
-          input {
-            border: 1px solid $element1;
-            width: 250px;
-            height: 30px;
-            background-color: $element1;
+    padding-top: 2rem;
+    box-sizing: border-box;
+    .category-zone {
+      .category-edit {
+        .category-input {
+          display: flex;
+          flex-direction: row;
+          li {
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            width: 150px;
+            &:first-child {
+              width: 120px;
+              font-size: 14px;
+            }
+            input {
+              border: 1px solid $element1;
+              height: 30px;
+              width: 140px;
+              box-sizing: border-box;
+              padding-left: 0.3rem;
+            }
+            button {
+              outline: none;
+              background-color: $element1;
+              width: 60px;
+              height: 30px;
+              box-sizing: border-box;
+            }
           }
         }
-      }
-      button {
-        display: inline-block;
-        width: 70px;
-        height: 30px;
-        color: #fff;
-        background-color: $element2;
-        font-family: $defaultNumFont;
-        font-size: 14px;
-        font-weight: 400;
-        margin-top: 1rem;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        cursor: pointer;
+        .detailed-input {
+          display: flex;
+          flex-direction: row;
+          margin-top: 0.5rem;
+          li {
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            width: 150px;
+            &:first-child {
+              width: 120px;
+              font-size: 14px;
+            }
+            select {
+              width: 140px;
+              height: 30px;
+              box-sizing: border-box;
+              border: 1px solid $element1;
+              &:focus {
+                outline: none;
+              }
+            }
+            input {
+              border: 1px solid $element1;
+              height: 30px;
+              width: 140px;
+              box-sizing: border-box;
+              padding-left: 0.3rem;
+            }
+            button {
+              outline: none;
+              background-color: $element1;
+              width: 60px;
+              height: 30px;
+              box-sizing: border-box;
+            }
+          }
+        }
       }
     }
   }

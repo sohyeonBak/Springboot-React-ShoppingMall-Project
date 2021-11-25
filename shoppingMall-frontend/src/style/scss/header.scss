@@ -44,13 +44,10 @@
         font-family: $defaultTxtFont;
         font-size: 14px;
         font-weight: 400;
-        a {
-          font-family: $defaultTxtFont;
-          font-size: 14px;
-          font-weight: 400;
-          svg {
-            padding-top: 0.4rem;
-          }
+        cursor: pointer;
+        vertical-align: top;
+        svg {
+          padding-top: 0.5rem;
         }
       }
       .logout {

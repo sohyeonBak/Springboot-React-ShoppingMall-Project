@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
-import { useState,useCallback } from 'react';
+import React, { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { RootState } from '../../../reducers';
 import { logInRequestAction } from '../../../reducers/user';
+import '../../../style/scss/auth.scss'
 
 type LogInState = {
   username: string,
   password: string
 }
 
-const Login = () => {
+const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { done } = useSelector((state:RootState)=> state.user.login)
@@ -19,7 +21,7 @@ const Login = () => {
     if(done){
       history.push('/')
     }
-  },[done])
+  },[done, history])
 
   const onUsername = (e: any) => {
     setUsername(e.target.value)
@@ -35,13 +37,20 @@ const Login = () => {
     e.preventDefault();
     const login: LogInState={username,password}
     dispatch(logInRequestAction(login))
-  },[username,password])
-
+  },[username,password,dispatch])
 
   const kakaoOauth = `https://kauth.kakao.com/oauth/authorize?client_id=9f2407a32eb59fd6f8274ae8c537b676&redirect_uri=http://localhost:3000/login/oauth2/code/kakao&response_type=code`
-  return (
-    <>
-      <div className="auth-contents">
+  
+  return(
+    <div className="auth">
+      <div className="auth-section">
+        <div className="auth-list">
+          <ul className="auth-list-contents">
+            <li>로그인</li>
+          </ul>
+        </div>
+        
+        <div className="auth-contents">
         <form className="auth-feilds" >
           <input type="text" placeholder="아이디" value={username} onChange={onUsername} name='username' ></input>
           <br />
@@ -49,7 +58,9 @@ const Login = () => {
           <br />
           <button onClick={onAddLogIN}>확인</button>
           <br />
-          <a>아이디/비밀번호 찾기</a>
+          <Link to={'/join'}>
+            회원가입 하기
+          </Link>
         </form>
       </div>
       <div className="auth-api">
@@ -60,8 +71,9 @@ const Login = () => {
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
-    </>
-  );
-};
+      </div>
+    </div>
+  )
+}
 
-export default Login;
+export default LogIn;

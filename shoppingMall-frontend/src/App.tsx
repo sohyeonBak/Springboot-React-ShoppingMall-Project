@@ -1,12 +1,13 @@
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 import Header from "./component/home/header/header"
 import Home from "./component/home/main/home"
-import SignIn from "./component/home/signin/signin";
+import LogIn from "./component/home/auth/login";
 import MyInfo from "./component/home/mypage/myinfo";
 import ShoppingBasket from "./component/home/shopping-basket/shopping-basket";
 import './style/scss/App.scss';
-import KakaoAuth from "./component/home/signin/oauth/kakaoAuth";
-import Signup from "./component/home/signin/signup";
+import KakaoAuth from "./component/home/auth/oauth/kakaoAuth";
+import Signup from "./component/home/auth/signup";
+import Admin from "./component/admin/admin";
 
 function App() {
   return (
@@ -18,13 +19,13 @@ function App() {
           <Home />
         </Route>
         <Route path='/loginForm' >
-          <SignIn />
+          <LogIn />
         </Route>
         <Route path='/login/oauth2/code/kakao' >
           <KakaoAuth />
         </Route>
         <Route path='/join'>
-            <Signup />
+          <Signup />
         </Route>
         <Route path='/myshop' >
           <ShoppingBasket />
@@ -32,6 +33,10 @@ function App() {
         <Route path='/mypage' >
           <MyInfo />
         </Route>
+        <Route path='/admin' >
+          <Admin />
+        </Route>
+        
       </Switch>
     </BrowserRouter>
     </>

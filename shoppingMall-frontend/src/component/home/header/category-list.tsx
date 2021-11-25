@@ -1,23 +1,5 @@
-import { useState } from 'react';
-
 
 const CategoryList = () => {
-  const [list, setList]=useState(
-    [{
-      id:1,
-      name:"top",
-      kind:"knit"
-    },{
-      id:2,
-      name:"top",
-      kind:"dress"
-    },{
-      id:1,
-      name:"top",
-      kind:"outer"
-    }]
-)
-
 
   return (
     <div className="hide-section">

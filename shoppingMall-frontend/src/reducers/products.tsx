@@ -1,11 +1,24 @@
+import { AxiosError } from "axios";
 import produce from "immer"
+import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
+import { asyncState, AsyncState } from "./util";
 
-interface RootState {
+//type
+export interface CategoiesUpload {
   id: number,
-  kind: string
+  kind: string,
+  details : []
 }
 
-export const initialState = {
+export type ProductState = {
+  mainCategory: AsyncState<CategoiesUpload, Error>
+}
+
+const initialState: ProductState = {
+  mainCategory: asyncState.initial()
+}
+
+export const initialStates = {
   mainProducts : [
     // {
     //   id: 1,
@@ -44,46 +57,37 @@ export const initialState = {
     //   }
     // }
   ],
-  mainCategory:[
-    {
-      id:1,
-      kind: '상의',
-    }
-  ],
+  mainCategory:[],
   saveProductLoading: false,
   saveProductDone: false,
   saveProductError: null,
 }
 
-const dummyCategory = {
-  id:2,
-  kind: '하의',
-}
+export const ADD_CATEGORY_REQUEST = 'ADD_CATEGORY_REQUEST';
+export const ADD_CATEGORY_SUCCESS = 'ADD_CATEGORY_SUCCESS';
+export const ADD_CATEGORY_FAILURE = 'ADD_CATEGORY_FAILURE';
 
-export const SAVE_PRODUCT_REQUEST = 'SAVE_PRODUCT_REQUEST';
-export const SAVE_PRODUCT_SUCCESS = 'SAVE_PRODUCT_SUCCESS';
-export const SAVE_PRODUCT_FAILURE = 'SAVE_PRODUCT_FAILURE';
+export const addCategoryAsync = createAsyncAction(
+  ADD_CATEGORY_REQUEST,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE
+)<CategoiesUpload, CategoiesUpload, AxiosError>()
 
-const reducer = (state = initialState, action:any) => produce(state, (draft)=>{
-  switch (action.type) {
-    case SAVE_PRODUCT_REQUEST:
-      draft.saveProductLoading = true;
-      draft.saveProductDone = false;
-      draft.saveProductError = null;
-    break;
-    case SAVE_PRODUCT_SUCCESS:
-      draft.saveProductLoading = false;
-      draft.saveProductDone = true;
-      draft.saveProductError = null;
-    break;
-    case SAVE_PRODUCT_FAILURE:
-      draft.saveProductLoading = true;
-      draft.saveProductDone = false;
-      draft.mainCategory.push(dummyCategory);
-    break;
-    default:
-      break;
-  }
+export type CategoryAction = ActionType<typeof addCategoryAsync>
+
+const product = createReducer<ProductState>(initialState,{
+  [ADD_CATEGORY_REQUEST]: state => ({
+    ...state,
+    mainCategory: asyncState.load()
+  }),
+  [ADD_CATEGORY_SUCCESS]: (state, action) => ({
+    ...state,
+    mainCategory: asyncState.success(action.payload)
+  }),
+  [ADD_CATEGORY_FAILURE]: (state, action) => ({
+    ...state,
+    mainCategory: asyncState.error(action.payload)
+  }),
 })
 
-export default reducer;
+export default product;
