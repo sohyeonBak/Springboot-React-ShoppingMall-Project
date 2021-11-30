@@ -11,8 +11,12 @@ import CategoryList from './category-list';
 import SearchForm from './search-form';
 
 
+export interface categoryIProps {
+  setCategory : (prev: boolean)=>void
+}
+
 const Header = () => {
-  const [category, setCategory] = useState(false)
+  const [category, setCategory] = useState<boolean>(false)
   const [search, setSearch] = useState(false)
   const { done } = useSelector((state: RootState) => state.user.login)
   let user = localStorage.getItem('token')
@@ -74,7 +78,7 @@ const Header = () => {
         </div>
       </div>
 
-      {category ? <CategoryList></CategoryList> : ''}
+      {category ? <CategoryList setCategory={setCategory}></CategoryList > : ''}
       {search ? <SearchForm></SearchForm> : ''}
 
 

@@ -58,7 +58,7 @@ const LogIn = () => {
           <br />
           <button onClick={onAddLogIN}>확인</button>
           <br />
-          <Link to={'/join'}>
+          <Link to={'/loginForm/join'}>
             회원가입 하기
           </Link>
         </form>

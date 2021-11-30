@@ -74,6 +74,7 @@
   display: flex;
   justify-content: center;
   background-color: $default;
+  z-index: 200;
   .category-zone {
     width: 1280px;
     display: flex;

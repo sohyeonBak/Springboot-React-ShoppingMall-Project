@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import produce from "immer"
 import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
 import { asyncState, AsyncState } from "./util";
 
@@ -11,7 +10,7 @@ export interface CategoiesUpload {
 }
 
 export type ProductState = {
-  mainCategory: AsyncState<CategoiesUpload, Error>
+  mainCategory: AsyncState<CategoiesUpload[], Error>
 }
 
 const initialState: ProductState = {
@@ -72,6 +71,11 @@ export const addCategoryAsync = createAsyncAction(
   ADD_CATEGORY_SUCCESS,
   ADD_CATEGORY_FAILURE
 )<CategoiesUpload, CategoiesUpload, AxiosError>()
+
+export const categoryRequestAction = (payload:any) => ({
+  type: ADD_CATEGORY_SUCCESS,
+  payload
+})
 
 export type CategoryAction = ActionType<typeof addCategoryAsync>
 

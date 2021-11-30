@@ -8,6 +8,8 @@ import './style/scss/App.scss';
 import KakaoAuth from "./component/home/auth/oauth/kakaoAuth";
 import Signup from "./component/home/auth/signup";
 import Admin from "./component/admin/admin";
+import ProductsList from "./component/home/products-list/products-list";
+import Auth from "./component/home/auth/auth";
 
 function App() {
   return (
@@ -19,13 +21,10 @@ function App() {
           <Home />
         </Route>
         <Route path='/loginForm' >
-          <LogIn />
+          <Auth />
         </Route>
-        <Route path='/login/oauth2/code/kakao' >
-          <KakaoAuth />
-        </Route>
-        <Route path='/join'>
-          <Signup />
+        <Route path='/productlist'>
+          <ProductsList />
         </Route>
         <Route path='/myshop' >
           <ShoppingBasket />
