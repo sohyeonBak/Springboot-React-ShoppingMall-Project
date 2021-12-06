@@ -1,7 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../reducers';
-import { ADD_CATEGORY_REQUEST, categoryRequestAction } from '../../reducers/products';
 
 
 const Categories = () => {
@@ -9,9 +6,6 @@ const Categories = () => {
   const [category, setCategory] = useState('')
   const [selected, setSelected] = useState('상의');
   const [detailedCategory, setDetailedCategory] = useState('');
-
-  const { mainCategory } = useSelector((state:RootState) => state.product)
-  const dispatch = useDispatch();
 
   const handleSelect = useCallback((e)=>{
     setSelected(e.target.value)
@@ -26,8 +20,8 @@ const Categories = () => {
   }
 
   const onAddCategory = useCallback(()=>{
-    dispatch(categoryRequestAction(category))
-  },[category])
+    // dispatch(categoryRequestAction(category))
+  },[])
 
   const onAddDetailedCategory = useCallback(()=>{
 

@@ -10,11 +10,6 @@ import '../../../style/scss/header.scss'
 import CategoryList from './category-list';
 import SearchForm from './search-form';
 
-
-export interface categoryIProps {
-  setCategory : (prev: boolean)=>void
-}
-
 const Header = () => {
   const [category, setCategory] = useState<boolean>(false)
   const [search, setSearch] = useState(false)
@@ -78,7 +73,7 @@ const Header = () => {
         </div>
       </div>
 
-      {category ? <CategoryList setCategory={setCategory}></CategoryList > : ''}
+      {category ? <CategoryList setCategory={setCategory} /> : ''}
       {search ? <SearchForm></SearchForm> : ''}
 
 

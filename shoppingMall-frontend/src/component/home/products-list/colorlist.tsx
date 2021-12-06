@@ -1,9 +1,10 @@
 import React, { CSSProperties } from 'react';
-import { ListColorIProps } from './products-list-detailed';
 
+interface ListColorIProps {
+  color: string
+}
 
-
-const ListColor = ({color} : ListColorIProps) => {
+const ColorList = ({color} : ListColorIProps) => {
   
   const listStyle: CSSProperties = {
     background : color
@@ -13,4 +14,4 @@ const ListColor = ({color} : ListColorIProps) => {
     <li style={listStyle}></li>    
   );}
 
-export default ListColor;
+export default ColorList;

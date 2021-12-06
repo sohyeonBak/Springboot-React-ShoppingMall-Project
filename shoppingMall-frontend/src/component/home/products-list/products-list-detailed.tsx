@@ -1,24 +1,36 @@
-import React from 'react';
-import ListColor from './listcolor';
-import { ProductsListIProps } from './products-list';
+import React, { CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
+import ColorList from './colorlist';
 
-export interface ListColorIProps {
-  color : string
+interface ProductListIProps {
+  list : {
+    id : number,
+    image : string,
+    title: string,
+    price: number,
+    color: string[],
+    kind: string,
+    detailed_kind: string
+  }
 }
 
-const ProductsListDetailed = ({image, title, price, color}: ProductsListIProps) => {
-  
+const ProductsListDetailed = ({list} : ProductListIProps) => {
   return(
-    <div className="list-product">
-      <img src={image} />
-      <ul className="list-product-info">
-        <li>{title}</li>
-        <li>{price}</li>
-      </ul>
-      <ul className="list-product-color">
-        {color.map((color, idx)=><ListColor key={idx} color={color}/>)}
-      </ul>
-    </div>    
+    <Link to={'/product'}>
+      <div className="list-product" >
+        <img src={list.image} alt=''/>
+        <ul className="list-product-info">
+          <li>{list.title}</li>
+          <li>{list.price}</li>
+        </ul>
+        <ul className="list-product-color">
+          {list.color.map((color, index)=>
+            <ColorList key={index} color={color}/>
+          )}
+        </ul>
+      </div>    
+    </Link>
+    
   );}
 
 export default ProductsListDetailed;
