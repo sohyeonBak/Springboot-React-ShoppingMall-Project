@@ -5,9 +5,204 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  div {
+  .detailed-product {
     width: 768px;
-    height: 500px;
-    border: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    .product-image-zone {
+      width: 50%;
+      .product-image--main {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        overflow: scroll;
+        margin-top: 1rem;
+        li {
+          width: 100px;
+          height: 100px;
+          padding-right: 0.5rem;
+          img {
+            width: 100px;
+            height: 100%;
+            object-fit: cover;
+          }
+          &:last-child {
+            padding: 0;
+          }
+        }
+      }
+    }
+    .product-explain {
+      width: 50%;
+      padding-left: 1rem;
+      box-sizing: border-box;
+      .product-explain--title {
+        padding-top: 1rem;
+        box-sizing: border-box;
+        h3 {
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0;
+        }
+        p {
+          font-size: 14px;
+          color: $element2;
+          padding-top: 0.5rem;
+        }
+      }
+      .product-explain--color {
+        padding-top: 3rem;
+        box-sizing: border-box;
+        h4 {
+          font-size: 14px;
+          margin: 0;
+        }
+        ul {
+          width: 100%;
+          height: 35px;
+          border: 1px solid $element1;
+          margin-top: 0.5rem;
+          display: flex;
+          flex-direction: row;
+          li {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.5rem;
+            margin-left: 0.5rem;
+            box-sizing: border-box;
+            border: 1px solid $element1;
+          }
+        }
+      }
+      .product-explain--size {
+        padding-top: 3rem;
+        box-sizing: border-box;
+        h4 {
+          font-size: 14px;
+          margin: 0;
+        }
+        ul {
+          width: 100%;
+          height: 35px;
+          border: 1px solid $element1;
+          margin-top: 0.5rem;
+          display: flex;
+          flex-direction: row;
+          li {
+            width: 30%;
+            height: 20px;
+            margin-top: 0.5rem;
+            margin-left: 0.5rem;
+            box-sizing: border-box;
+            background-color: $element1;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+          }
+        }
+      }
+      .product-explain--content {
+        padding-top: 3rem;
+        box-sizing: border-box;
+        h4 {
+          font-size: 14px;
+          margin: 0;
+        }
+        div {
+          margin-top: 0.5rem;
+          height: 145px;
+          border-bottom: 1px solid $element1;
+          overflow: scroll;
+          padding-bottom: 0.5rem;
+          box-sizing: border-box;
+          p {
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 0.2rem;
+            &:first-child {
+              padding-bottom: 1rem;
+            }
+          }
+        }
+      }
+      .product-explain--button {
+        position: relative;
+        margin-top: 1.3rem;
+        height: 100px;
+        button {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 40px;
+          background-color: $element2;
+          font-size: 14px;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .product-review {
+    width: 768px;
+    margin-top: 10rem;
+    .product-review--title {
+      width: 100%;
+      border-bottom: 1px solid $element1;
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+        border-bottom: 1px solid $element2;
+        display: inline-block;
+      }
+    }
+    .product-review--content {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid $element1;
+      height: 140px;
+      margin-top: 1rem;
+      .product-review--image {
+        border-left: 1px solid $element1;
+        img {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          padding-left: 1rem;
+          padding-top: 1rem;
+          box-sizing: border-box;
+        }
+      }
+      .product-review--subs {
+        padding-top: 1rem;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        h4 {
+          font-size: 14px;
+          margin: 0;
+        }
+        div {
+          display: flex;
+          flex-direction: row;
+          padding-top: 1.5rem;
+        }
+        p {
+          font-size: 12px;
+          padding-top: 0.5rem;
+        }
+        em {
+          font-size: 10px;
+          color: $element2;
+          margin: 0;
+        }
+      }
+    }
   }
 }

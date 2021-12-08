@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ColorList from './colorlist';
 

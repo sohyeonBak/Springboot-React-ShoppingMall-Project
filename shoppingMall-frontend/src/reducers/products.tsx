@@ -43,7 +43,7 @@ export const initialState = {
     { id : 19, image : 'https://images.unsplash.com/photo-1601762603339-fd61e28b698a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80', title : 'product', price : 123000, color : ['#fff', '#222222'], kind: '상의', detailed_kind: '아우터' }, 
     { id : 20, image : 'https://images.unsplash.com/photo-1547976152-ac956d37caf1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80', title : 'product', price : 123000, color : ['#fff', '#222222'], kind: '상의', detailed_kind: '아우터' }, 
   ],
-  mainProduce: { 
+  mainProduct: { 
       id: 1, 
       image: [
         {id: 1, src:'https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80'},
@@ -56,11 +56,11 @@ export const initialState = {
       price: 164000,
       color: ['#222','#dbdbdb'],
       size: ['S','M','L'],
-      explanation : '올겨울 가장 클래식한 순간을 함께할 에센셜 아이템입니다. 나파 가죽 소재로 만들어진 셔츠 드레스입니다. 클래식한 핏과 부드러운 질감을 살린 아이템입니다. 시즌무드를 더해 줄 부츠와 주얼리를 함께 매치해 감각적인 룩을 완성해보세요.',
+      explanation : '올겨울 가장 클래식한 순간을 함께할 에센셜 아이템입니다. 나파 가죽 소재로 만들어진 셔츠 드레스입니다. 클래식한 핏과 부드러운 질감을 살린 아이템입니다. 시즌무드를 더해 줄 부츠와 주얼리를 함께 매치해 감각적인 룩을 완성해보세요. 올겨울 가장 클래식한 순간을 함께할 에센셜 아이템입니다. 나파 가죽 소재로 만들어진 셔츠 드레스입니다. 클래식한 핏과 부드러운 질감을 살린 아이템입니다. 시즌무드를 더해 줄 부츠와 주얼리를 함께 매치해 감각적인 룩을 완성해보세요.',
       review : [
         { 
           id: 1,
-          image: '',
+          image: 'https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
           rate: 4,
           user: {
             id: 1,

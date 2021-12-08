@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ProductsListDetailed from './products-list-detailed';
 import '../../../style/scss/productlist.scss'
 import { useSelector } from 'react-redux';
