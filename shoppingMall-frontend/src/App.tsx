@@ -29,7 +29,7 @@ function App() {
         <Route path='/product' >
           <Product />
         </Route>
-        <Route path='/myshop' >
+        <Route path='/mybasket' >
           <ShoppingBasket />
         </Route>
         <Route path='/mypage' >

@@ -16,9 +16,11 @@ const Product = () => {
         <div className="product-review--title">
           <h3>상품리뷰 {mainProduct.review.length}</h3>
         </div>
+        <div className="product-review--con">
         {mainProduct.review.map((review)=> 
           <Review key={review.id} review={review} productTitle={mainProduct.title}/>  
         )}
+        </div>
       </div>
     </section>
   );

@@ -1,13 +1,17 @@
 import React from 'react';
 
 interface ProductImageIProps {
-  image : string
+  image : {
+    id: number, 
+    src: string
+  },
+  onhandleMainImage : (img: string)=>void
 }
 
-const ProductImage = ({image} : ProductImageIProps) => {
+const ProductImage = ({image, onhandleMainImage} : ProductImageIProps) => {
   
   return(
-    <li><img src={image} alt=''/></li>   
+    <li><img onClick={()=>onhandleMainImage(image.src)} src={image.src} alt=''/></li>   
   )}
 
 export default ProductImage;
