@@ -1,0 +1,111 @@
+@import "./reset.scss";
+@import "./layout";
+
+.basket-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin-top: 5rem;
+    padding-bottom: 1rem;
+    text-align: left;
+    width: 768px;
+  }
+  .basket-content {
+    width: 768px;
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    margin-top: 1rem;
+    border-top: 1px solid $element1;
+    padding-top: 1rem;
+    .basket-content--image {
+      width: 30%;
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+    }
+    .basket-content--subs {
+      padding-left: 1rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: auto;
+      div {
+        padding-top: 1rem;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+          padding-top: 0.5rem;
+        }
+      }
+      ul {
+        padding-bottom: 2rem;
+        li {
+          font-size: 14px;
+          padding-bottom: 0.5rem;
+        }
+      }
+    }
+    .basket-content--delete {
+      padding-right: 1rem;
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
+  .basket-conclusion {
+    margin-top: 5rem;
+    width: 768px;
+    .basket-conclusion--title {
+      width: 100%;
+      border-bottom: 1px solid $element1;
+      h3 {
+        font-size: 16px;
+        border-bottom: 1px solid $element2;
+        display: inline-block;
+      }
+    }
+    .basket-conclusion--content {
+      margin-top: 1rem;
+      ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        li {
+          height: 30px;
+          font-size: 14px;
+          line-height: 30px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          box-sizing: border-box;
+        }
+        &:last-child {
+          border-top: 1px solid $element2;
+          padding-top: 1rem;
+          margin-top: 1rem;
+          li {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .basket-conclusion--button {
+      display: flex;
+      justify-content: end;
+      margin-top: 1rem;
+      margin-bottom: 5rem;
+      button {
+        width: 90px;
+        height: 30px;
+        background-color: $element2;
+        color: #fff;
+      }
+    }
+  }
+}

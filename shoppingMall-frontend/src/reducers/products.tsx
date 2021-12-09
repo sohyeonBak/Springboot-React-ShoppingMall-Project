@@ -90,14 +90,18 @@ export const initialState = {
     {
       id: 1,
       title: '상품명',
+      image: 'https://images.unsplash.com/photo-1580682312385-e94d8de1cf3c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1406&q=80',
       price: 164000,
+      size: 'M',
       stock: 1,
       color: '블랙',
     },
     {
       id: 1,
       title: '상품명2',
+      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
       price: 86000,
+      size: 'S',
       stock: 1,
       color: '베이지',
     },
