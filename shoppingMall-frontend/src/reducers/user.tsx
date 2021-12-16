@@ -33,11 +33,24 @@ export interface LogOutProfile {
   authorization: null,
 }
 
+interface UserProfile {
+  name: string,
+  email : string,
+  username : string,
+  phone: number,
+  address : {
+    main_address : string,
+    sub_address : string
+  }
+
+}
+
 
 //state
 export type UserState = {
   signup:AsyncState<SignUpProfile, Error>
   login: AsyncState<LogInResProfile, Error>
+  me: AsyncState<UserProfile, Error>
 }
 
 
@@ -46,6 +59,7 @@ export type UserState = {
 const initialState: UserState = {
   signup: asyncState.initial(),
   login: asyncState.initial(),
+  me: asyncState.initial()
 }
 
 

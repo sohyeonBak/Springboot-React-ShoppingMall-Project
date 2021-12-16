@@ -100,11 +100,16 @@
       justify-content: end;
       margin-top: 1rem;
       margin-bottom: 5rem;
-      button {
+      a {
         width: 90px;
         height: 30px;
         background-color: $element2;
-        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 30px;
+        span {
+          color: #fff;
+        }
       }
     }
   }

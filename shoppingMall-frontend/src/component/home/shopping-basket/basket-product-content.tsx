@@ -15,7 +15,7 @@ interface BasketIProps {
   cart : IBasket
 }
 
-const BasketContent = ({cart}: BasketIProps) => {
+const BasketProductContent = ({cart}: BasketIProps) => {
   
   return(
     <div className="basket-content">
@@ -42,4 +42,4 @@ const BasketContent = ({cart}: BasketIProps) => {
     </div>  
   );}
 
-export default BasketContent;
+export default BasketProductContent;

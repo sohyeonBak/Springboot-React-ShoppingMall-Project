@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { RootState } from '../../../reducers';
 import { logInRequestAction } from '../../../reducers/user';
 import '../../../style/scss/auth.scss'
+import LoginAlret from '../modal/loginalret';
 
 type LogInState = {
   username: string,
@@ -13,10 +14,13 @@ type LogInState = {
 }
 
 const LogIn = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const { done } = useSelector((state:RootState)=> state.user.login)
-  const history = useHistory()
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [failedlogin, setFailedLogin] = useState(false);
+  const { done } = useSelector((state:RootState)=> state.user.login);
+  const { error } = useSelector((state:RootState) => state.user.login);
+  
+  const history = useHistory();
   useEffect(()=>{
     if(done){
       history.push('/')
@@ -35,6 +39,12 @@ const LogIn = () => {
   const dispatch = useDispatch()
   const onAddLogIN = useCallback((e: any) => {
     e.preventDefault();
+    console.log(error);
+    if(error !== null){
+      setFailedLogin(true);
+      setUsername('');
+      setPassword('');
+    }
     const login: LogInState={username,password}
     dispatch(logInRequestAction(login))
   },[username,password,dispatch])
@@ -71,6 +81,7 @@ const LogIn = () => {
           <li><img src="" alt="" />네이버</li>
         </ul>
       </div>
+      {failedlogin ? <LoginAlret setFailedLogin={setFailedLogin} /> : '' }
       </div>
     </div>
   )
